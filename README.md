@@ -8,7 +8,7 @@ Sample project showing how to use direct3d12 in wpf
 - Init Window
 - Init D3d9
 - D3d11On12 Create Texture
-- Shared To D3d9
-- Shared To D3d12
+- Share to D3d9
+- Share to D3d12
 - D3d12 Draw
-- D3d9 Present
+- D3d9 Present by D3DImage
