@@ -12,3 +12,5 @@ Sample project showing how to use D3d12 in wpf
 - Share to D3d12
 - D3d12 Draw
 - D3d9 Present by D3DImage
+
+![](./1.png)
