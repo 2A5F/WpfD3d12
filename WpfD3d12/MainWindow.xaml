@@ -1,0 +1,24 @@
+﻿<Window x:Class="WpfD3d12.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interop;assembly=PresentationCore"
+        xmlns:local="clr-namespace:WpfD3d12"
+        mc:Ignorable="d"
+        MinWidth="640" MinHeight="360"
+        SizeToContent="WidthAndHeight"
+        Title="WpfD3d12" WindowStartupLocation="CenterScreen"
+        SizeChanged="OnSizeChanged"
+        Loaded="OnLoaded"
+        Closed="OnClosed">
+    <Grid Name="Output" Height="540" Width="960">
+        <Grid.Background >
+            <ImageBrush Stretch="Fill">
+                <ImageBrush.ImageSource>
+                    <i:D3DImage x:Name="D3DImage" />
+                </ImageBrush.ImageSource>
+            </ImageBrush>
+        </Grid.Background>
+    </Grid>
+</Window>

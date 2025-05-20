@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net9.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <NoWarn>MSB3884</NoWarn>
+        <StartupObject>WpfD3d12.Program</StartupObject>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+        <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <D3D12SDKVersion>715</D3D12SDKVersion>
+        <D3D12SDKPath>D3D12</D3D12SDKPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Coplt.Dropping" Version="0.6.0" />
+        <PackageReference Include="Coplt.Mathematics" Version="0.10.0" />
+        <PackageReference Include="Coplt.Systems" Version="0.13.0" />
+        <PackageReference Include="Coplt.Union" Version="0.17.0" />
+        <PackageReference Include="Silk.NET.Core" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct2D" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct3D11" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct3D11.Extensions.D3D11On12" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct3D12" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.Direct3D9" Version="2.22.0" />
+        <PackageReference Include="Silk.NET.DirectComposition" Version="2.22.0" />
+        <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.715.1-preview" GeneratePathProperty="true"/>
+        <PackageReference Include="Microsoft.Direct3D.DXC" Version="1.8.2502.8" GeneratePathProperty="true" ExcludeAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include=".\D3D12SDKVersionPatcher.exe" Visible="false"/>
+        <None Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\**\*.dll"
+              Exclude="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\DirectSR.dll"
+              Link="$(D3D12SDKPath)\%(RecursiveDir)%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false"
+        />
+        <None Include="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\**\*.pdb"
+              Exclude="$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\DirectSR.pdb;$(PkgMicrosoft_Direct3D_D3D12)\build\native\bin\x64\d3dconfig.pdb"
+              Link="$(D3D12SDKPath)\%(RecursiveDir)%(Filename)%(Extension)"
+              CopyToOutputDirectory="PreserveNewest"
+              Visible="false"
+              Condition="'$(Configuration)' == 'Debug'"
+        />
+    </ItemGroup>
+
+    <Target Name="PatchDxSdkExport" AfterTargets="Build">
+        <Exec Command=".\D3D12SDKVersionPatcher.exe .\$(OutDir)\$(AssemblyName).exe $(D3D12SDKVersion) .\$(D3D12SDKPath)\"/>
+    </Target>
+
+</Project>

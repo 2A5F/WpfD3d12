@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WpfD3d12": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
