@@ -1,6 +1,6 @@
 # WpfD3d12
 
-Sample project showing how to use direct3d12 in wpf
+Sample project showing how to use D3d12 in wpf
 
 ### How
 - Init D3d12
