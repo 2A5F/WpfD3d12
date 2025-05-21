@@ -13,4 +13,13 @@ Sample project showing how to use D3d12 in wpf
 - D3d12 Draw
 - D3d9 Present by D3DImage
 
+```csharp
+var color = new float4(0.83f, 0.8f, 0.97f, 1f);
+    Graphics.CommandList.Handle->ClearRenderTargetView(
+        SwapChain.CurrentRtv,
+        ref Unsafe.As<float4, float>(ref color),
+        0, null
+);
+```
+
 ![](./1.png)
